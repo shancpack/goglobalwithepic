@@ -16,6 +16,18 @@
   gtag('js', new Date());
   gtag('config', 'G-J8RV4ZMKKX');
 </script>
+<!-- Meta Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1447030554141877');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1447030554141877&ev=PageView&noscript=1"></noscript>
 <style>
   :root{
     --navy:#0b1f3a; --navy-2:#122c50; --ink:#1a2433; --muted:#5b6b80;
@@ -279,6 +291,7 @@
           this.querySelectorAll('.field,.submit,.fine').forEach(el => el.style.display='none');
           document.getElementById('okMsg').style.display='block';
           if (typeof gtag === 'function') gtag('event', 'generate_lead', {form_id: 'auditForm'});
+          if (typeof fbq === 'function') fbq('track', 'Lead');
         })
         .catch(() => this.submit());
       return;
