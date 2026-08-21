@@ -8,6 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J8RV4ZMKKX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J8RV4ZMKKX');
+</script>
 <style>
   :root{
     --navy:#0b1f3a; --navy-2:#122c50; --ink:#1a2433; --muted:#5b6b80;
@@ -270,6 +278,7 @@
         .then(() => {
           this.querySelectorAll('.field,.submit,.fine').forEach(el => el.style.display='none');
           document.getElementById('okMsg').style.display='block';
+          if (typeof gtag === 'function') gtag('event', 'generate_lead', {form_id: 'auditForm'});
         })
         .catch(() => this.submit());
       return;
