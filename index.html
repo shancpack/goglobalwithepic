@@ -62,6 +62,17 @@
   .cta:hover{filter:brightness(1.06);transform:translateY(-1px)}
   .hero .quiet{margin-top:16px;font-size:.9rem;color:#6b5a45}
 
+  /* brand logo marquee — mirrors epicglobalinc.com's strip */
+  .logostrip{background:#fff;padding:44px 0;overflow:hidden}
+  .marquee{display:flex;width:max-content;will-change:transform;animation:marquee 80s linear infinite}
+  .logostrip:hover .marquee{animation-play-state:paused}
+  .marquee__group{display:flex;align-items:center;gap:3rem;padding-right:3rem}
+  .logo-cell{flex:0 0 auto;display:flex;align-items:center;justify-content:center;height:6rem;width:12rem;opacity:.7;transition:opacity 300ms}
+  .logo-cell:hover{opacity:1}
+  .logo-cell img{max-height:5rem;max-width:100%;object-fit:contain;mix-blend-mode:multiply;pointer-events:none;user-select:none}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.marquee{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
+
   /* stat band */
   .stats{background:var(--bg);border-bottom:1px solid var(--line)}
   .stats .row{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;padding:52px 0}
@@ -161,13 +172,79 @@
   </div>
 </section>
 
+<div class="logostrip" aria-label="Brands Epic Global has operated for">
+  <div class="marquee" id="logoMarquee">
+    <div class="marquee__group">
+      <div class="logo-cell"><img src="logos/activation.png" alt="ACTIVATION" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/ambr-group.png" alt="Ambr Group" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/nu-skin.png" alt="NU SKIN" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/young-living.png" alt="Young Living" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/plexus.png" alt="plexus" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/younique.png" alt="Younique" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/ageloc.png" alt="ageLOC" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/bucked-up.png" alt="BUCKED UP" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/serovital.png" alt="SeroVital" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/pharmanex.png" alt="PHARMANEX" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/thrive.png" alt="thrive" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/truvy.png" alt="Truvy" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/tranont.png" alt="TRANONT" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/reuzel.png" alt="REUZEL" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/relacore.png" alt="RELACORE" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/r-f.png" alt="R+F" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/zantrex.png" alt="Zantrex" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/riman.png" alt="Riman" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/organo.png" alt="ORGANO" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/nutricentials.png" alt="NUTRICENTIALS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/now.png" alt="now" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/novex-biotech.png" alt="Novex Biotech" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/neumi.png" alt="neumi" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/muscle-moose.png" alt="MUSCLE MOOSE" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/mixhers.png" alt="mixhers" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/midisem.png" alt="MIDISEM" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/make-wellness.png" alt="MAKE WELLNESS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/made.png" alt="made" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/live-pure.png" alt="Live PURE" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/lionstrike.png" alt="lionstrike" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/lifening.png" alt="Lifening" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/life-cider.png" alt="life cider" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/kings.png" alt="KINGS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/k.png" alt="K" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/incellderm.png" alt="INCELLDERM" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/ice-elements.png" alt="ICE ELEMENTS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/healthy-home.png" alt="HEALTHY home" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/h2o-cardio.png" alt="H2O CARDIO" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/gentlemen-republic.png" alt="Gentlemen Republic" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/epoch.png" alt="epoch" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/doctors-best.png" alt="Doctor's BEST" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/cronk-nutrients.png" alt="CRONK NUTRIENTS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/botalab.png" alt="botalab" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/bona-botanica.png" alt="BONA BOTANICA" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/bode-pro.png" alt="bode PRO" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/beauty-focus.png" alt="BEAUTY FOCUS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/ap-24.png" alt="AP 24" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/perfect-press.png" alt="PERFECT PRESS" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/phonesoap.png" alt="PHONESOAP" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/pure-fuel.png" alt="PURE FUEL" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/radiansome.png" alt="RADIANSOME" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/simmtronics.png" alt="Simmtronics" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/sutera.png" alt="sutera" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/think-smarter-products.png" alt="Think Smarter Products" loading="lazy"></div>
+      <div class="logo-cell"><img src="logos/zive.png" alt="Zive" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+<script>
+  // duplicate the logo group so the CSS marquee loops seamlessly
+  (function(){var m=document.getElementById('logoMarquee');m.appendChild(m.querySelector('.marquee__group').cloneNode(true));})();
+</script>
+
 <div class="stats">
   <div class="wrap row">
     <div class="stat"><div class="n">$1B<b>+</b></div><div class="l">in total sales</div></div>
     <div class="stat"><div class="n">12</div><div class="l">years of expertise</div></div>
     <div class="stat"><div class="n">40</div><div class="l">countries of market coverage</div></div>
     <div class="stat"><div class="n">33</div><div class="l">proven audit categories</div></div>
-    <div class="stat"><div class="n">6,500</div><div class="l">case studies</div></div>
+    <div class="stat"><div class="n">6,500</div><div class="l">split tests</div></div>
   </div>
 </div>
 
