@@ -144,7 +144,9 @@
   .proof .jump{display:flex;align-items:baseline;justify-content:center;gap:20px;margin:34px 0 16px;flex-wrap:wrap}
   .proof .from{font-size:2rem;font-weight:700;color:#64748b;text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:rgba(246,137,50,.75)}
   .proof .arrow{font-size:2rem;color:var(--orange)}
-  .proof .to{font-size:3.8rem;font-weight:800;color:var(--orange)}
+  .proof .to{font-size:3.8rem;font-weight:800;color:var(--orange);display:inline-block;min-width:4.2ch;text-align:left}
+  .proof .to.landed{animation:landpop .45s ease-out}
+  @keyframes landpop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
   .proof p{color:#cbd5e1;max-width:580px;margin:0 auto}
   .proof .foot{font-size:.88rem;color:#8494ab;margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto}
 
@@ -318,7 +320,7 @@
     <div class="jump">
       <span class="from">4.05%</span>
       <span class="arrow">→</span>
-      <span class="to">8.8%</span>
+      <span class="to" id="proofTo">8.8%</span>
     </div>
     <p>One of our managed clients implemented their audit's recommendations and watched session conversion jump from 4.05% to 8.8%&nbsp;</p><p>— <b style="color:#fff">same traffic, more than double the sales.</b></p>
     <div class="foot">Doubling conversion doubles revenue and cuts your cost per sale in half. No other lever on Amazon moves the needle like this one.</div>
@@ -489,6 +491,37 @@
       requestAnimationFrame(tick);
     }
     tick();
+  })();
+</script>
+
+<script>
+  // count-up animation on the 8.8% proof number — starts from the 4.05%
+  // baseline and climbs when the section scrolls into view
+  (function () {
+    var el = document.getElementById('proofTo');
+    if (!el || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var FROM = 4.05, TO = 8.8, DUR = 1600, done = false;
+    var io = new IntersectionObserver(function (entries) {
+      if (done || !entries[0].isIntersecting) return;
+      done = true; io.disconnect();
+      var t0 = performance.now();
+      el.textContent = FROM.toFixed(2) + '%';
+      function step(now) {
+        var t = Math.min(1, (now - t0) / DUR);
+        var ease = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        var v = FROM + (TO - FROM) * ease;
+        if (t < 1) {
+          el.textContent = v.toFixed(2) + '%';
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = '8.8%';
+          el.classList.add('landed');
+        }
+      }
+      requestAnimationFrame(step);
+    }, {threshold: 0.6});
+    io.observe(el);
   })();
 </script>
 
