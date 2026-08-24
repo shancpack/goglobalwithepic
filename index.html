@@ -252,7 +252,8 @@
 </div>
 <script>
   // duplicate the logo group so the CSS marquee loops seamlessly
-  (function(){var m=document.getElementById('logoMarquee');m.appendChild(m.querySelector('.marquee__group').cloneNode(true));})();
+  // (data-clone marks it so edit-mode export can strip it back out)
+  (function(){var m=document.getElementById('logoMarquee');var c=m.querySelector('.marquee__group').cloneNode(true);c.setAttribute('data-clone','1');m.appendChild(c);})();
 </script>
 
 <div class="stats">
@@ -410,6 +411,66 @@
     window.location.href = `mailto:hello@globalwithepic.com?subject=${encodeURIComponent('Free audit request: ')}${g('f-brand')}&body=${body}`;
     document.getElementById('okMsg').style.display='block';
   });
+</script>
+
+<script>
+  // ---- OWNER EDIT MODE ----------------------------------------------
+  // Visit https://goglobalwithepic.com/?edit to edit the page in place:
+  // click text and type; Cmd/Ctrl+B bold, Cmd/Ctrl+I italic, Enter for a
+  // new line. "Copy page HTML" puts the full updated file on the
+  // clipboard; paste it over index.html in the GitHub editor and commit.
+  // Purely visual on this visitor's browser — the site is only changed
+  // once the commit lands, so there is nothing here for anyone to abuse.
+  (function () {
+    if (!/[?&]edit\b/.test(location.search)) return;
+
+    document.body.contentEditable = 'true';
+    document.body.spellcheck = true;
+
+    // don't let clicks fire the form or links while editing
+    document.getElementById('auditForm').addEventListener('submit', function (e) { e.preventDefault(); }, true);
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a');
+      if (a && !a.closest('#editbar')) e.preventDefault();
+    }, true);
+
+    const bar = document.createElement('div');
+    bar.id = 'editbar';
+    bar.contentEditable = 'false';
+    bar.innerHTML =
+      '<style>#editbar{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#101828;color:#fff;' +
+      'display:flex;align-items:center;justify-content:center;gap:14px;padding:12px 16px;flex-wrap:wrap;' +
+      'font:600 14px Inter,sans-serif;box-shadow:0 -6px 24px rgba(0,0,0,.25)}' +
+      '#editbar .hint{color:#8494ab;font-weight:400}' +
+      '#editbar button,#editbar a{border:0;cursor:pointer;border-radius:8px;padding:9px 16px;font:700 14px Inter,sans-serif;text-decoration:none}' +
+      '#editbar .copy{background:linear-gradient(to right,#ea580c,#c2410c);color:#fff}' +
+      '#editbar .gh{background:rgba(255,255,255,.12);color:#fff}' +
+      '#editbar .exit{background:transparent;color:#8494ab}</style>' +
+      '<span>✏️ EDIT MODE</span>' +
+      '<span class="hint">Click text and type · Cmd+B bold · Cmd+I italic · Enter = new line</span>' +
+      '<button class="copy" id="editCopy">1. Copy page HTML</button>' +
+      '<a class="gh" href="https://github.com/shancpack/goglobalwithepic/edit/main/index.html" target="_blank" rel="noopener">2. Open GitHub editor →</a>' +
+      '<button class="exit" id="editExit">Exit</button>';
+    document.body.appendChild(bar);
+
+    document.getElementById('editCopy').addEventListener('click', function () {
+      const doc = document.documentElement.cloneNode(true);
+      doc.querySelector('#editbar').remove();
+      doc.querySelectorAll('[data-clone="1"]').forEach(function (el) { el.remove(); });
+      const b = doc.querySelector('body');
+      b.removeAttribute('contenteditable');
+      b.removeAttribute('spellcheck');
+      const html = '<!DOCTYPE html>\n' + doc.outerHTML;
+      navigator.clipboard.writeText(html).then(function () {
+        const btn = document.getElementById('editCopy');
+        btn.textContent = '✓ Copied — now paste it over index.html';
+        setTimeout(function () { btn.textContent = '1. Copy page HTML'; }, 4000);
+      });
+    });
+    document.getElementById('editExit').addEventListener('click', function () {
+      location.href = location.pathname;
+    });
+  })();
 </script>
 
 </body>
