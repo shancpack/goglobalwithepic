@@ -459,6 +459,49 @@
 </script>
 
 <script>
+  // stat-band count-up — quiet: once, staggered, ease-out; each number
+  // finishes by restoring its exact original markup ($1B+ keeps the orange +)
+  (function () {
+    var band = document.querySelector('.stats');
+    if (!band || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els = Array.prototype.slice.call(band.querySelectorAll('.stat .n'));
+    var done = false;
+    var io = new IntersectionObserver(function (entries) {
+      if (done || !entries[0].isIntersecting) return;
+      done = true; io.disconnect();
+      els.forEach(function (el, idx) {
+        var orig = el.innerHTML;
+        var text = el.textContent;
+        var money = text.indexOf('B') !== -1;
+        var target = money ? 1 : parseInt(text.replace(/,/g, ''), 10);
+        var commas = text.indexOf(',') !== -1;
+        if (!money && isNaN(target)) return;
+        setTimeout(function () {
+          var t0 = performance.now(), DUR = 1300;
+          function step(now) {
+            var t = Math.min(1, (now - t0) / DUR);
+            var ease = 1 - Math.pow(1 - t, 3);
+            if (t < 1) {
+              if (money) el.textContent = '$' + (target * ease).toFixed(1) + 'B';
+              else {
+                var v = Math.round(target * ease);
+                el.textContent = commas ? v.toLocaleString('en-US') : String(v);
+              }
+              requestAnimationFrame(step);
+            } else {
+              el.innerHTML = orig;
+            }
+          }
+          requestAnimationFrame(step);
+        }, idx * 120);
+      });
+    }, {threshold: 0.5});
+    io.observe(band);
+  })();
+</script>
+
+<script>
   // count-up animation on the 8.8% proof number — starts from the 4.05%
   // baseline and climbs when the section scrolls into view
   (function () {
