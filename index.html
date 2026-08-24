@@ -68,7 +68,29 @@
   .nav .cta-sm:hover{background:#fff}
 
   /* hero — Epic's signature warm gradient, dark ink type */
-  .hero{background:linear-gradient(to bottom right,var(--orange) 0%,var(--cream) 52%,#fff 100%);padding:var(--space-hero-top) 0 var(--space-hero-bottom);text-align:center}
+  .hero{background:linear-gradient(to bottom right,var(--orange) 0%,var(--cream) 52%,#fff 100%);padding:var(--space-hero-top) 0 var(--space-hero-bottom);text-align:center;position:relative;overflow:hidden}
+  #heroNet{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+  .hero .wrap{position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;text-align:left}
+  .hero-grid h1{margin:0}
+  .hero-grid .sub{margin-left:0;margin-right:0}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero-grid .sub{margin-left:auto;margin-right:auto}.hero-visual{max-width:420px;margin:12px auto 0}}
+
+  /* audit scorecard mockup */
+  .hero-visual{position:relative}
+  .scorecard{background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(16,24,40,.18),0 4px 14px rgba(16,24,40,.08);padding:26px 26px 22px;transform:rotate(2deg);animation:cardfloat 7s ease-in-out infinite}
+  @keyframes cardfloat{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-8px)}}
+  @media (prefers-reduced-motion: reduce){.scorecard{animation:none}}
+  .scorecard .sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .scorecard .sc-title{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .scorecard .sc-grade{font-size:1.05rem;font-weight:800;color:#fff;background:linear-gradient(to right,var(--orange-deep),var(--orange-dark));border-radius:8px;padding:.35rem .8rem}
+  .scorecard .sc-row{display:grid;grid-template-columns:1fr 90px 34px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+  .scorecard .sc-row .n{font-size:.88rem;font-weight:600;color:var(--ink)}
+  .scorecard .sc-bar{height:7px;border-radius:99px;background:#f0ece5;overflow:hidden}
+  .scorecard .sc-bar i{display:block;height:100%;border-radius:99px}
+  .scorecard .sc-row .v{font-size:.82rem;font-weight:700;color:var(--muted);text-align:right}
+  .scorecard .sc-foot{margin-top:16px;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .scorecard .sc-foot::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange-deep)}
   .hero .pill{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#7c3a10;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:.5rem 1.3rem;margin-bottom:30px}
   .hero h1{font-size:clamp(2.2rem,5vw,3.75rem);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--ink);max-width:860px;margin:0 auto}
   .hero h1 em{font-style:normal;color:var(--orange-deep)}
@@ -178,11 +200,29 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="wrap">
-    <div class="pill">Free 33-Section Listing Audit</div>
-    <h1>How good is your Amazon listing, <em><i>really</i>?</em></h1><div><em><br></em></div><p class="sub">Get a comprehensive, professional <b>33-section listing audit</b> from the team behind over&nbsp;<b>$1B</b>&nbsp;in Amazon marketplace sales.&nbsp;</p><p class="sub">Clear, prioritized recommendations. Yours to keep.</p>
-    <a class="cta" href="#audit">Get my Score →</a>
-    <div class="quiet">No cost · No sales calls · No strings</div>
+  <canvas id="heroNet" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="pill">Free 33-Section Listing Audit</div>
+      <h1>How good is your Amazon listing, <em><i>really</i>?</em></h1><div><em><br></em></div><p class="sub">Get a comprehensive, professional <b>33-section listing audit</b> from the team behind over&nbsp;<b>$1B</b>&nbsp;in Amazon marketplace sales.&nbsp;</p><p class="sub">Clear, prioritized recommendations. Yours to keep.</p>
+      <a class="cta" href="#audit">Get my Score →</a>
+      <div class="quiet">No cost · No sales calls · No strings</div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="scorecard">
+        <div class="sc-head">
+          <span class="sc-title">Listing Audit · Scorecard</span>
+          <span class="sc-grade">74 / 100</span>
+        </div>
+        <div class="sc-row"><span class="n">Main image &amp; stack</span><span class="sc-bar"><i style="width:88%;background:#3f9e56"></i></span><span class="v">88</span></div>
+        <div class="sc-row"><span class="n">Title &amp; keywords</span><span class="sc-bar"><i style="width:64%;background:#e8a33d"></i></span><span class="v">64</span></div>
+        <div class="sc-row"><span class="n">Bullets &amp; description</span><span class="sc-bar"><i style="width:79%;background:#3f9e56"></i></span><span class="v">79</span></div>
+        <div class="sc-row"><span class="n">A+ content</span><span class="sc-bar"><i style="width:48%;background:#d64545"></i></span><span class="v">48</span></div>
+        <div class="sc-row"><span class="n">Pricing &amp; Buy Box</span><span class="sc-bar"><i style="width:82%;background:#3f9e56"></i></span><span class="v">82</span></div>
+        <div class="sc-row"><span class="n">Reviews &amp; trust</span><span class="sc-bar"><i style="width:71%;background:#e8a33d"></i></span><span class="v">71</span></div>
+        <div class="sc-foot">Example scorecard · yours covers all 33 sections</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -400,6 +440,44 @@
     window.location.href = `mailto:hello@globalwithepic.com?subject=${encodeURIComponent('Free audit request: ')}${g('f-brand')}&body=${body}`;
     document.getElementById('okMsg').style.display='block';
   });
+</script>
+
+<script>
+  // hero particle network — echoes the constellation on epicglobalinc.com
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cv = document.getElementById('heroNet'), cx = cv.getContext('2d');
+    var P = [], N = 42, W, H;
+    function size() {
+      W = cv.offsetWidth; H = cv.offsetHeight;
+      cv.width = W * devicePixelRatio; cv.height = H * devicePixelRatio;
+      cx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    size(); addEventListener('resize', size);
+    for (var i = 0; i < N; i++) P.push({x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.25, vy: (Math.random()-.5)*.25, r: 1.2+Math.random()*1.8});
+    function tick() {
+      cx.clearRect(0, 0, W, H);
+      for (var i = 0; i < N; i++) {
+        var p = P[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -20) p.x = W+20; if (p.x > W+20) p.x = -20;
+        if (p.y < -20) p.y = H+20; if (p.y > H+20) p.y = -20;
+        cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.2832);
+        cx.fillStyle = 'rgba(124,58,16,.45)'; cx.fill();
+        for (var j = i+1; j < N; j++) {
+          var q = P[j], dx = p.x-q.x, dy = p.y-q.y, d = dx*dx+dy*dy;
+          if (d < 16900) {
+            cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(q.x, q.y);
+            cx.strokeStyle = 'rgba(124,58,16,' + (0.22*(1-d/16900)).toFixed(3) + ')';
+            cx.lineWidth = 1; cx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
 </script>
 
 <script>
