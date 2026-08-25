@@ -90,7 +90,12 @@
 
   /* audit scorecard mockup */
   .hero-visual{position:relative}
-  .scorecard{background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(16,24,40,.18),0 4px 14px rgba(16,24,40,.08);padding:26px 26px 22px;transform:rotate(2deg);animation:cardfloat 7s ease-in-out infinite}
+  .scorecard{position:relative;background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(16,24,40,.18),0 4px 14px rgba(16,24,40,.08);padding:26px 26px 22px;transform:rotate(2deg);animation:cardfloat 7s ease-in-out infinite}
+  .stamp{position:absolute;right:10px;bottom:44px;transform:rotate(-12deg);font-size:2.5rem;font-weight:800;color:#d64545;border:4px solid #d64545;border-radius:12px;padding:0 14px;letter-spacing:.04em;opacity:.88;background:rgba(255,255,255,.55);pointer-events:none}
+  .stamp.hidden{opacity:0}
+  .stamp.slam{animation:slam .5s cubic-bezier(.2,1.4,.4,1) forwards}
+  @keyframes slam{0%{opacity:0;transform:scale(2.4) rotate(-26deg)}55%{opacity:.95;transform:scale(.9) rotate(-9deg)}100%{opacity:.88;transform:scale(1) rotate(-12deg)}}
+  .cta-inverse{background:#fff;color:var(--orange-dark);box-shadow:0 12px 30px rgba(0,0,0,.2)}
   @keyframes cardfloat{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-8px)}}
   @media (prefers-reduced-motion: reduce){.scorecard{animation:none}}
   .scorecard .sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
@@ -138,14 +143,14 @@
   /* texture on light sections: faint copper dot grid + soft corner glow */
   section:not(.hero):not(.proof):not(.whyfree):not(.optin){
     background-image:
-      radial-gradient(1100px 560px at 88% -8%, rgba(246,137,50,.09), transparent 62%),
-      radial-gradient(rgba(124,58,16,.06) 1px, transparent 1.4px);
+      radial-gradient(1100px 560px at 88% -8%, rgba(246,137,50,.16), transparent 62%),
+      radial-gradient(rgba(124,58,16,.10) 1.2px, transparent 1.6px);
     background-size:auto, 22px 22px;
   }
   section.how, section.whofor{
     background-image:
-      radial-gradient(1100px 560px at 10% 108%, rgba(246,137,50,.09), transparent 62%),
-      radial-gradient(rgba(124,58,16,.06) 1px, transparent 1.4px);
+      radial-gradient(1100px 560px at 10% 108%, rgba(246,137,50,.16), transparent 62%),
+      radial-gradient(rgba(124,58,16,.10) 1.2px, transparent 1.6px);
     background-size:auto, 22px 22px;
   }
   .kicker{font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-deep)}
@@ -287,7 +292,7 @@
       <div class="scorecard">
         <div class="sc-head">
           <span class="sc-title">Listing Audit · Scorecard</span>
-          <span class="sc-grade">74 / 100</span>
+          <span class="sc-grade" id="scGrade">74 / 100</span>
         </div>
         <div class="sc-row"><span class="n">Main image &amp; stack</span><span class="sc-bar"><i style="width:88%;background:#3f9e56"></i></span><span class="v">88</span></div>
         <div class="sc-row"><span class="n">Title &amp; keywords</span><span class="sc-bar"><i style="width:64%;background:#e8a33d"></i></span><span class="v">64</span></div>
@@ -296,6 +301,7 @@
         <div class="sc-row"><span class="n">Pricing &amp; Buy Box</span><span class="sc-bar"><i style="width:82%;background:#3f9e56"></i></span><span class="v">82</span></div>
         <div class="sc-row"><span class="n">Reviews &amp; trust</span><span class="sc-bar"><i style="width:71%;background:#e8a33d"></i></span><span class="v">71</span></div>
         <div class="sc-foot">Example scorecard · yours covers all 33 sections</div>
+        <div class="stamp" id="scStamp">D+</div>
       </div>
     </div>
   </div>
@@ -485,6 +491,7 @@
       </div>
     </details>
     <p class="more">Every checkpoint is scored on evidence and paired with a plain-language recommendation.</p>
+    <a class="cta" href="#audit">Get my free audit →</a>
   </div>
 </section>
 
@@ -512,6 +519,7 @@
         </ul>
       </div>
     </div>
+    <div style="text-align:center"><a class="cta" href="#audit">Get my free audit →</a></div>
   </div>
 </section>
 
@@ -532,6 +540,7 @@
     <h2>Why would we do this for free?</h2>
     <p>Because the audit is how we introduce ourselves. Epic Global operates Amazon, Walmart, and eBay storefronts across 40 countries — we buy inventory, run listings, fund advertising, and protect brands. The audit is the same teardown we run on our own catalog, and it's our best first impression.</p>
     <p><b>Here's the honest version:</b> some brands read their audit, implement the fixes themselves, and we never hear from them again — that's fine. Some ask us to implement it. And occasionally we meet a brand we want to work with as an operator. Every one of those starts with an audit worth taking seriously. <b>There is no version of this where you owe us anything.</b></p>
+    <a class="cta cta-inverse" href="#audit">Get my free audit →</a>
   </div>
 </section>
 
@@ -563,6 +572,7 @@
       <summary>Who sees my information?</summary>
       <div class="a">The audit team, and nobody else. We don't sell lists, and we'll only email you about your audit.</div>
     </details>
+    <a class="cta" href="#audit">Get my free audit →</a>
   </div>
 </section>
 
@@ -678,6 +688,61 @@
       requestAnimationFrame(tick);
     }
     tick();
+  })();
+</script>
+
+<script>
+  // hero scorecard animation — bars fill one at a time, total counts up,
+  // then the grade stamp slams on like a marked school assignment
+  (function () {
+    var card = document.querySelector('.scorecard');
+    var stamp = document.getElementById('scStamp');
+    var grade = document.getElementById('scGrade');
+    if (!card || !stamp || !grade) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    var rows = Array.prototype.map.call(card.querySelectorAll('.sc-row'), function (r) {
+      var bar = r.querySelector('.sc-bar i'), val = r.querySelector('.v');
+      return {bar: bar, val: val, w: parseInt(bar.style.width, 10), v: parseInt(val.textContent, 10)};
+    });
+    // reset to zero before first paint
+    rows.forEach(function (o) { o.bar.style.transition = 'none'; o.bar.style.width = '0%'; o.val.textContent = '0'; });
+    grade.textContent = '0 / 100';
+    stamp.classList.add('hidden');
+    var STAG = 300, FILL = 650, done = false;
+    var io = new IntersectionObserver(function (es) {
+      if (done || !es[0].isIntersecting) return;
+      done = true; io.disconnect();
+      setTimeout(run, 350);
+    }, {threshold: 0.4});
+    io.observe(card);
+    function run() {
+      rows.forEach(function (o, i) {
+        setTimeout(function () {
+          o.bar.style.transition = 'width ' + FILL + 'ms cubic-bezier(.22,.9,.35,1)';
+          o.bar.style.width = o.w + '%';
+          var t0 = performance.now();
+          (function step(now) {
+            var t = Math.min(1, (now - t0) / FILL);
+            var e = 1 - Math.pow(1 - t, 3);
+            o.val.textContent = Math.round(o.v * e);
+            if (t < 1) requestAnimationFrame(step);
+          })(t0);
+        }, i * STAG);
+      });
+      var TOTAL = (rows.length - 1) * STAG + FILL;
+      var t0 = performance.now();
+      (function g(now) {
+        var t = Math.min(1, (now - t0) / TOTAL);
+        var e = 1 - Math.pow(1 - t, 3);
+        grade.textContent = Math.round(74 * e) + ' / 100';
+        if (t < 1) requestAnimationFrame(g);
+        else setTimeout(function () {
+          stamp.classList.remove('hidden');
+          stamp.classList.add('slam');
+        }, 250);
+      })(t0);
+    }
   })();
 </script>
 
