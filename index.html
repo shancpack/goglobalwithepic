@@ -169,6 +169,66 @@
   .step h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin:12px 0 8px}
   .step p{font-size:.92rem;color:var(--muted)}
 
+  /* math / calculator panel */
+  .math{background:var(--bg-soft)}
+  .calc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 32px;margin-top:44px;box-shadow:0 10px 30px rgba(16,24,40,.06)}
+  .calc label{display:block;font-size:.9rem;font-weight:700;color:var(--ink);margin-bottom:14px}
+  .calc .revout{font-size:1.6rem;font-weight:800;color:var(--orange-deep)}
+  .calc input[type=range]{width:100%;margin:10px 0 26px;accent-color:var(--orange-deep)}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:720px){.tiles{grid-template-columns:1fr}}
+  .tile{border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center}
+  .tile.hot{border-color:var(--orange);background:#fff7ef}
+  .tile .t-l{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .tile .t-v{font-size:1.9rem;font-weight:800;color:var(--ink);margin-top:6px}
+  .tile.hot .t-v{color:var(--orange-deep)}
+  .tile .t-s{font-size:.8rem;color:var(--muted);margin-top:4px}
+  .calc .fine-math{font-size:.8rem;color:var(--muted);margin-top:20px}
+
+  /* repeat CTA band */
+  .ctaband{background:linear-gradient(to right,var(--orange-deep),var(--orange-dark));text-align:center;padding:56px 0}
+  .ctaband h2{color:#fff;margin:0}
+  .ctaband .cta{background:#fff;color:var(--orange-dark);box-shadow:0 12px 30px rgba(0,0,0,.18);margin-top:26px}
+  .ctaband .quiet{margin-top:14px;font-size:.9rem;color:#ffd9bd}
+
+  /* full 33 checklist */
+  .checklist{margin-top:34px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .checklist summary{cursor:pointer;list-style:none;padding:20px 26px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:center;background:#fff}
+  .checklist summary::after{content:"+";font-size:1.4rem;color:var(--orange-deep);font-weight:800}
+  .checklist[open] summary::after{content:"–"}
+  .checklist .cols33{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;padding:6px 26px 24px;background:#fff}
+  @media(max-width:720px){.checklist .cols33{grid-template-columns:1fr}}
+  .cols33 h4{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-dark);margin:18px 0 6px}
+  .cols33 ol{margin:0;padding-left:20px}
+  .cols33 li{font-size:.88rem;color:var(--muted);padding:3px 0}
+
+  /* who this is for */
+  .whofor .cols2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  @media(max-width:720px){.whofor .cols2{grid-template-columns:1fr}}
+  .qual{border:1px solid var(--line);border-radius:12px;padding:28px}
+  .qual.yes{border-top:4px solid #3f9e56}
+  .qual.no{border-top:4px solid var(--line)}
+  .qual h3{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:14px}
+  .qual ul{list-style:none}
+  .qual li{padding:8px 0 8px 28px;position:relative;font-size:.95rem;color:var(--muted)}
+  .qual.yes li::before{content:"✓";position:absolute;left:0;color:#3f9e56;font-weight:800}
+  .qual.no li::before{content:"—";position:absolute;left:0;color:var(--muted);font-weight:800}
+
+  /* why free — dark honesty panel */
+  .whyfree{background:var(--ink);color:#fff}
+  .whyfree h2{color:#fff}
+  .whyfree .kicker{color:var(--orange)}
+  .whyfree p{color:#cbd5e1;max-width:660px;margin-top:16px;font-size:1.02rem}
+  .whyfree p b{color:#fff}
+
+  /* FAQ */
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq details:first-of-type{border-top:1px solid var(--line);margin-top:40px}
+  .faq summary{cursor:pointer;list-style:none;padding:20px 4px;font-weight:700;color:var(--ink);font-size:1rem;display:flex;justify-content:space-between;align-items:center}
+  .faq summary::after{content:"+";font-size:1.3rem;color:var(--orange-deep);font-weight:800;margin-left:16px}
+  .faq details[open] summary::after{content:"–"}
+  .faq .a{padding:0 4px 20px;color:var(--muted);font-size:.95rem;max-width:720px}
+
   /* form — dark ink, orange submit */
   .optin{background:var(--ink)}
   .optin .inner{max-width:560px;margin:0 auto;text-align:center}
@@ -315,20 +375,130 @@
   </div>
 </section>
 
+<section class="math">
+  <div class="wrap">
+    <div class="kicker">Do the math</div>
+    <h2>What would a conversion lift be worth to you?</h2>
+    <p class="lead">Same traffic, same ad spend — conversion is the multiplier on everything you're already paying for. Drag the slider to your monthly Amazon revenue.</p>
+    <div class="calc">
+      <label for="revSlider">Your monthly Amazon revenue: <span class="revout" id="revOut">$50K</span></label>
+      <input type="range" id="revSlider" min="0" max="100" value="35" aria-label="Monthly Amazon revenue">
+      <div class="tiles">
+        <div class="tile"><div class="t-l">+10% conversion</div><div class="t-v" id="lift10">+$5K</div><div class="t-s">per month, same traffic</div></div>
+        <div class="tile"><div class="t-l">+25% conversion</div><div class="t-v" id="lift25">+$12.5K</div><div class="t-s">per month, same traffic</div></div>
+        <div class="tile hot"><div class="t-l">The client above: +117%</div><div class="t-v" id="lift117">+$58.5K</div><div class="t-s">per month, same traffic</div></div>
+      </div>
+      <div class="fine-math">Straight arithmetic on the number you set — an illustration, not a projection or promise. What your listing can actually gain is exactly what the audit tells you.</div>
+    </div>
+  </div>
+</section>
+
+<div class="ctaband">
+  <div class="wrap">
+    <h2>Find out where your listing is leaking.</h2>
+    <a class="cta" href="#audit">Get my free audit →</a>
+    <div class="quiet">33 sections · scored · free</div>
+  </div>
+</div>
+
 <section>
   <div class="wrap">
     <div class="kicker">What we look at</div>
     <h2>33 categories. Each scored separately.&nbsp;</h2><h2>Each with a specific recommendation.</h2>
     <p class="lead">Not a quick scroll — a section-by-section teardown by a team of professionals who run listings for billion-dollar global brands every day.</p>
     <div class="grid">
-      <div class="card"><span class="num">Sections 1–6</span><h3>Main image &amp; image stack</h3><p>Does your main image stop the scroll? Does the stack tell a story that sells before a single word is read?</p></div>
-      <div class="card"><span class="num">Sections 7–12</span><h3>Title &amp; keywords</h3><p>Keyword coverage vs. readability, search placement, and the backend terms most brands leave on the table.</p></div>
-      <div class="card"><span class="num">Sections 13–18</span><h3>Bullets &amp; description</h3><p>Bullets shoppers actually read — benefit order, scannability, objection handling, and mobile rendering.</p></div>
-      <div class="card"><span class="num">Sections 19–24</span><h3>A+ content &amp; brand story</h3><p>Module structure, above-the-fold impact, cross-sell placement, and spec clarity that closes the sale.</p></div>
-      <div class="card"><span class="num">Sections 25–29</span><h3>Pricing, offers &amp; Buy Box</h3><p>Price positioning, coupon and deal signals, and the competitive dynamics around your Buy Box.</p></div>
-      <div class="card"><span class="num">Sections 30–33</span><h3>Reviews &amp; trust signals</h3><p>Review sentiment, rating trajectory, Q&amp;A gaps, and the trust markers shoppers check before buying.</p></div>
+      <div class="card"><span class="num">8 checkpoints</span><h3>Main image</h3><p>Does it stop the scroll and explain the product in three seconds — at thumbnail size, where the click actually happens?</p></div>
+      <div class="card"><span class="num">7 checkpoints</span><h3>Title &amp; keywords</h3><p>Keyword placement, proof numbers up front, the customer's own words, and the compliance traps that get titles rewritten.</p></div>
+      <div class="card"><span class="num">6 checkpoints</span><h3>Image stack &amp; gallery</h3><p>Does the stack answer every shopping question — size, fit, proof, context — before a single word is read?</p></div>
+      <div class="card"><span class="num">6 checkpoints</span><h3>Bullets &amp; copy</h3><p>Specifics over adjectives, skimmable structure, and whether your copy handles the #1 hesitation buyers bring from reviews.</p></div>
+      <div class="card"><span class="num">6 checkpoints</span><h3>A+ content</h3><p>The largest selling space on the page — module order, the four questions it must answer above the fold, and design quality.</p></div>
+      <div class="card"><span class="num">Deliverable</span><h3>Scores + priority plan</h3><p>Every checkpoint scored with evidence, rolled into a graded scorecard and a prioritized, plain-language fix list.</p></div>
     </div>
-    <p class="more">Every section is scored and paired with a plain-language recommendation.</p>
+    <details class="checklist">
+      <summary>See all 33 checkpoints we score</summary>
+      <div class="cols33">
+        <div>
+          <h4>Main image — 8</h4>
+          <ol>
+            <li>In-use "doing its job" shot — not a display photo</li>
+            <li>Three-second interpretability at thumbnail</li>
+            <li>Function &amp; fit made visible, not implied</li>
+            <li>Color palette aligned with the promise</li>
+            <li>On-image text readable at thumbnail size</li>
+            <li>Frame fill, staging &amp; resolution standards</li>
+            <li>Amazon image compliance screen</li>
+            <li>Claim density (supplements &amp; health)</li>
+          </ol>
+          <h4>Title — 7</h4>
+          <ol start="9">
+            <li>Character-limit compliance</li>
+            <li>Hero keyword leads the title</li>
+            <li>A proof number before word five</li>
+            <li>Voice-of-customer phrase included</li>
+            <li>Restricted-word screen</li>
+            <li>Item Highlights field utilized</li>
+            <li>Anti-pattern check (adjective-led, marketing-speak)</li>
+          </ol>
+          <h4>Image stack — 6</h4>
+          <ol start="16">
+            <li>Every shopping moment covered</li>
+            <li>Scale &amp; size context shown</li>
+            <li>Callout anchoring &amp; readability</li>
+            <li>Gallery compliance screen</li>
+            <li>Badge integrity — real marks only</li>
+            <li>Strongest asset ordered first</li>
+          </ol>
+        </div>
+        <div>
+          <h4>Bullets &amp; copy — 6</h4>
+          <ol start="22">
+            <li>Customer's exact language, not marketing-speak</li>
+            <li>Specificity over adjectives</li>
+            <li>Skimmable structure, hesitation-first</li>
+            <li>Restricted-word screen across all copy</li>
+            <li>Hesitation handling &amp; price justification</li>
+            <li>Grammar &amp; professionalism</li>
+          </ol>
+          <h4>A+ content — 6</h4>
+          <ol start="28">
+            <li>A+ exists and fills the page's largest selling space</li>
+            <li>The Four Questions test, above the fold</li>
+            <li>Asset build-order — story, comparison, proof</li>
+            <li>Design quality &amp; aesthetic-to-buyer match</li>
+            <li>A+ compliance screen</li>
+            <li>Claim density (supplements &amp; health)</li>
+          </ol>
+        </div>
+      </div>
+    </details>
+    <p class="more">Every checkpoint is scored on evidence and paired with a plain-language recommendation.</p>
+  </div>
+</section>
+
+<section class="whofor">
+  <div class="wrap">
+    <div class="kicker">Is this for you?</div>
+    <h2>Built for brands with real listings and real stakes.</h2>
+    <div class="cols2">
+      <div class="qual yes">
+        <h3>This audit is for you if…</h3>
+        <ul>
+          <li>You sell on Amazon and it's a meaningful part of your revenue</li>
+          <li>Your listing hasn't had a professional teardown in the last year</li>
+          <li>You're spending on ads and want the clicks you pay for to convert</li>
+          <li>You suspect your listing is "fine" — but you've never had it scored</li>
+          <li>You want specific fixes, not a pitch deck</li>
+        </ul>
+      </div>
+      <div class="qual no">
+        <h3>Skip it if…</h3>
+        <ul>
+          <li>You haven't launched on Amazon yet — audit needs a live listing</li>
+          <li>You're looking for a get-rich-quick hack — this is craft, not tricks</li>
+          <li>You want someone to tell you everything is great</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -340,6 +510,46 @@
       <div class="step"><div class="k">2</div><h3>We run the 33-section audit</h3><p>The same teardown we run on the listings we operate for billion-dollar global brands — scored section by section.</p></div>
       <div class="step"><div class="k">3</div><h3>You get clear recommendations</h3><p>Prioritized, plain-language fixes with an option for a call to walk through each step.&nbsp;</p></div>
     </div>
+  </div>
+</section>
+
+<section class="whyfree">
+  <div class="wrap">
+    <div class="kicker">The obvious question</div>
+    <h2>Why would we do this for free?</h2>
+    <p>Because the audit is how we introduce ourselves. Epic Global operates Amazon, Walmart, and eBay storefronts across 40 countries — we buy inventory, run listings, fund advertising, and protect brands. The audit is the same teardown we run on our own catalog, and it's our best first impression.</p>
+    <p><b>Here's the honest version:</b> some brands read their audit, implement the fixes themselves, and we never hear from them again — that's fine. Some ask us to implement it. And occasionally we meet a brand we want to work with as an operator. Every one of those starts with an audit worth taking seriously. <b>There is no version of this where you owe us anything.</b></p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="kicker">Questions</div>
+    <h2>Asked and answered.</h2>
+    <details>
+      <summary>Is this an automated report?</summary>
+      <div class="a">No. Software helps us gather the evidence, but the scoring and recommendations come from a team that runs Amazon listings every day, working through a 33-checkpoint framework built from thousands of split tests. That's why we ask for your listing URL — a human is going to read your page.</div>
+    </details>
+    <details>
+      <summary>What do you need from me?</summary>
+      <div class="a">The form above: your name, email, brand, listing URL, and revenue range. That's it — no seller account access, no API keys, no logins. The audit works entirely from what shoppers can see on your listing.</div>
+    </details>
+    <details>
+      <summary>What exactly do I receive?</summary>
+      <div class="a">A scored scorecard across all 33 checkpoints — main image, title, gallery, bullets, and A+ content — with evidence for each score and a prioritized list of plain-language fixes, ordered by what will move conversion most.</div>
+    </details>
+    <details>
+      <summary>Will someone call and pitch me?</summary>
+      <div class="a">No. The audit arrives by email. If you want a call to walk through the fixes, you can ask for one — that direction only.</div>
+    </details>
+    <details>
+      <summary>What if my listing scores well?</summary>
+      <div class="a">Then you'll know — with evidence — instead of assuming. A high-scoring audit is a real answer, not a failed sales attempt. We'd rather tell you your main image is excellent and your A+ has one gap than invent problems.</div>
+    </details>
+    <details>
+      <summary>Who sees my information?</summary>
+      <div class="a">The audit team, and nobody else. We don't sell lists, and we'll only email you about your audit.</div>
+    </details>
   </div>
 </section>
 
@@ -455,6 +665,30 @@
       requestAnimationFrame(tick);
     }
     tick();
+  })();
+</script>
+
+<script>
+  // conversion-value calculator — pure arithmetic on the slider value
+  (function () {
+    var slider = document.getElementById('revSlider');
+    if (!slider) return;
+    var out = document.getElementById('revOut');
+    var t10 = document.getElementById('lift10'), t25 = document.getElementById('lift25'), t117 = document.getElementById('lift117');
+    function fmt(v) {
+      if (v >= 1000000) return '$' + (v / 1000000).toFixed(v % 1000000 ? 1 : 0).replace(/\.0$/, '') + 'M';
+      return '$' + Math.round(v / 1000) + 'K';
+    }
+    function update() {
+      // log scale $5K -> $1M
+      var rev = Math.round(5000 * Math.pow(200, slider.value / 100) / 1000) * 1000;
+      out.textContent = fmt(rev);
+      t10.textContent = '+' + fmt(rev * 0.10);
+      t25.textContent = '+' + fmt(rev * 0.25);
+      t117.textContent = '+' + fmt(rev * 1.17);
+    }
+    slider.addEventListener('input', update);
+    update();
   })();
 </script>
 
