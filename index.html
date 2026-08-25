@@ -135,6 +135,19 @@
 
   section{padding:var(--space-section) 0}
   @media(max-width:720px){section{padding:var(--space-section-mobile) 0}}
+  /* texture on light sections: faint copper dot grid + soft corner glow */
+  section:not(.hero):not(.proof):not(.whyfree):not(.optin){
+    background-image:
+      radial-gradient(1100px 560px at 88% -8%, rgba(246,137,50,.09), transparent 62%),
+      radial-gradient(rgba(124,58,16,.06) 1px, transparent 1.4px);
+    background-size:auto, 22px 22px;
+  }
+  section.how, section.whofor{
+    background-image:
+      radial-gradient(1100px 560px at 10% 108%, rgba(246,137,50,.09), transparent 62%),
+      radial-gradient(rgba(124,58,16,.06) 1px, transparent 1.4px);
+    background-size:auto, 22px 22px;
+  }
   .kicker{font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-deep)}
   h2{font-size:clamp(1.6rem,3.4vw,2.35rem);font-weight:700;color:var(--ink);letter-spacing:-.015em;margin-top:14px;line-height:1.2}
   .lead{color:var(--muted);max-width:660px;margin-top:16px;font-size:1.05rem}
