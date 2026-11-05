@@ -93,10 +93,14 @@ h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:700;color:var(--ink);letter-
 @media(max-width:600px){.posts{grid-template-columns:1fr}}
 .pcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
 .pcard:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(16,24,40,.10)}
-.pcard .cover{height:132px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--orange) 0%,var(--cream) 70%,#fff 100%)}
-.pcard .cover.dark{background:linear-gradient(135deg,var(--ink) 0%,#2b3647 100%)}
-.pcard .cover.blue{background:linear-gradient(135deg,#0270a8 0%,#00A8EA 100%)}
-.pcard .cover svg{width:56px;height:56px}
+.pcard .cover{height:132px;display:flex;align-items:center;justify-content:center;background:var(--cream)}
+.pcard .cover svg{width:52px;height:52px;stroke:var(--orange-dark)}
+.pcard .cover.dark{background:var(--ink)}
+.pcard .cover.dark svg{stroke:var(--orange)}
+.pcard .cover.blue{background:#0270a8}
+.pcard .cover.blue svg{stroke:#fff}
+.pcard .cover.copper{background:#9a3412}
+.pcard .cover.copper svg{stroke:#fde8c8}
 .pcard .body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
 .pcard .tag{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-dark)}
 .pcard h3{font-size:1.08rem;font-weight:700;line-height:1.3;margin:8px 0 8px;color:var(--ink)}
