@@ -277,3 +277,8 @@ footer a{color:#cbd5e1}
 .faq summary::after{content:"+";font-size:1.3rem;color:var(--orange-deep);font-weight:800}
 .faq details[open] summary::after{content:"–"}
 .faq .a{padding:0 4px 20px;color:var(--muted);font-size:.95rem;max-width:740px}
+
+.pcard .cover.photo{padding:0;background:#e7e2da;overflow:hidden}
+.pcard .cover.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.pcard:hover .cover.photo img{transform:scale(1.04)}
+.pcard.feature .cover.photo{min-height:220px}
