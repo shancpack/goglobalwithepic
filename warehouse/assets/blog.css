@@ -56,7 +56,7 @@ header{position:sticky;top:0;z-index:50;background:#8a4a22;background:oklab(0.47
 .ratecard{background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(16,24,40,.18),0 4px 14px rgba(16,24,40,.08);padding:26px 26px 20px;transform:rotate(2deg);animation:cardfloat 7s ease-in-out infinite}
 @keyframes cardfloat{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-8px)}}
 @media (prefers-reduced-motion: reduce){.ratecard{animation:none}}
-@media(max-width:860px){.ratecard{transform:none;animation:none;max-width:440px}}
+@media(max-width:860px){.hero-grid > :has(> .ratecard){display:none}.ratecard{display:none}}
 .ratecard .rc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .ratecard .rc-title{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .ratecard .rc-tag{font-size:.75rem;font-weight:800;color:#fff;background:linear-gradient(to right,var(--orange-deep),var(--orange-dark));border-radius:8px;padding:.3rem .7rem}
