@@ -78,6 +78,50 @@
 </section>
 
 
+<section class="soft tex" id="estimate">
+  <div class="wrap">
+    <div class="kicker">Cost estimator</div>
+    <h2>Price a typical month in 30 seconds</h2>
+    <p class="lead">Move the sliders to match your business. The math uses Epic's published 3PL rates; postage and packaging are extra.</p>
+    <div class="calc">
+      <div class="inputs">
+        <div><label for="e-orders">D2C orders per month <output id="o-orders"></output></label><input type="range" id="e-orders" min="0" max="10000" step="50" value="1000"></div>
+        <div><label for="e-units">Average units per order <output id="o-units"></output></label><input type="range" id="e-units" min="1" max="5" step="0.1" value="1.5"></div>
+        <div><label for="e-pallets">Pallets in storage <output id="o-pallets"></output></label><input type="range" id="e-pallets" min="0" max="200" step="1" value="6"></div>
+        <div><label for="e-bins">Bin / shelf locations <output id="o-bins"></output></label><input type="range" id="e-bins" min="0" max="500" step="5" value="40"></div>
+        <div><label for="e-inbound">Single-SKU pallets received per month <output id="o-inbound"></output></label><input type="range" id="e-inbound" min="0" max="100" step="1" value="4"></div>
+        <div><label for="e-cases">B2B / FBA case orders per month <output id="o-cases"></output></label><input type="range" id="e-cases" min="0" max="500" step="5" value="0"></div>
+      </div>
+      <label class="chk" for="e-email"><input type="checkbox" id="e-email"> Orders arrive by email instead of the ShipHero integration (+$2.00 each)</label>
+      <div class="tiles">
+        <div class="tile"><div class="t-l">Fulfillment</div><div class="t-v" id="t-ful">$0</div><div class="t-s">pick, pack, label</div></div>
+        <div class="tile"><div class="t-l">Storage</div><div class="t-v" id="t-sto">$0</div><div class="t-s">pallets + bins / month</div></div>
+        <div class="tile"><div class="t-l">Receiving &amp; B2B</div><div class="t-v" id="t-rec">$0</div><div class="t-s">inbound + case orders</div></div>
+        <div class="tile hot"><div class="t-l">Monthly total</div><div class="t-v" id="t-tot">$0</div><div class="t-s" id="t-per">per order</div></div>
+      </div>
+      <p class="fine-math">Rates: $1.70 per D2C order (first unit included) + $0.30 each additional unit · $17/month per pallet position · $5/month per bin · $12 per single-SKU pallet received · $4 per case order · $2 per order entered by Epic. Excludes postage, packaging, prep labor ($35/hr) and pallet builds. Estimate only; your quote may differ.</p>
+      <a class="cta" href="#quote" style="margin-top:22px">Get an exact quote →</a>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var fmt=function(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})};
+  function calc(){
+    var o=+$('e-orders').value,u=+$('e-units').value,p=+$('e-pallets').value,b=+$('e-bins').value,
+        r=+$('e-inbound').value,c=+$('e-cases').value,em=$('e-email').checked;
+    $('o-orders').textContent=o.toLocaleString(); $('o-units').textContent=u.toFixed(1);
+    $('o-pallets').textContent=p; $('o-bins').textContent=b; $('o-inbound').textContent=r; $('o-cases').textContent=c;
+    var ful=o*1.70+o*(u-1)*0.30+(em?(o+c)*2:0), sto=p*17+b*5, rec=r*12+c*4, tot=ful+sto+rec;
+    $('t-ful').textContent=fmt(ful); $('t-sto').textContent=fmt(sto); $('t-rec').textContent=fmt(rec); $('t-tot').textContent=fmt(tot);
+    var n=o+c; $('t-per').textContent=n? '$'+(tot/n).toFixed(2)+' per order':'per order';
+  }
+  ['e-orders','e-units','e-pallets','e-bins','e-inbound','e-cases','e-email'].forEach(function(id){$(id).addEventListener('input',calc)});
+  calc();
+})();
+</script>
+
 <div class="logohead">Brands Epic Global has operated for</div>
 <div class="logostrip" aria-label="Brands Epic Global has operated for">
   <div class="marquee" id="logoMarquee">
@@ -138,12 +182,6 @@
 </div>
 <script>(function(){var m=document.getElementById('logoMarquee');if(!m)return;var c=m.querySelector('.marquee__group').cloneNode(true);c.setAttribute('data-clone','1');m.appendChild(c);})();</script>
 
-<div class="stats"><div class="wrap row">
-  <div class="stat"><div class="n">$1<b>.70</b></div><div class="l">per D2C order,<br>first unit included</div></div>
-  <div class="stat"><div class="n">$0</div><div class="l">order entry via the<br>ShipHero integration</div></div>
-  <div class="stat"><div class="n">96<b>%</b></div><div class="l">of the U.S. within two days<br>by ground from northern Utah*</div></div>
-  <div class="stat"><div class="n">Live</div><div class="l">inventory &amp; orders in your<br>own ShipHero portal</div></div>
-</div></div>
 
 <section class="soft" id="services">
   <div class="wrap">
@@ -221,53 +259,9 @@
   <div class="body"><div class="tag">Location</div><h3>Why ship from Utah? The case for a Mountain West warehouse</h3><p>Interstates 15 and 80, a deep logistics workforce, and ground reach to most of the country in two days. Why brands are adding Utah to their fulfillment map.</p><div class="meta">5 min read</div></div>
 </a>
     </div>
-    <p style="margin-top:22px;font-size:.8rem;color:var(--muted)">*Industry estimate for Salt Lake City reported by <a href="/warehouse/why-utah-fulfillment.html">Retail Insider</a>; Springville is about an hour south on I-15.</p>
   </div>
 </section>
 
-<section class="soft tex" id="estimate">
-  <div class="wrap">
-    <div class="kicker">Cost estimator</div>
-    <h2>Price a typical month in 30 seconds</h2>
-    <p class="lead">Move the sliders to match your business. The math uses Epic's published 3PL rates; postage and packaging are extra.</p>
-    <div class="calc">
-      <div class="inputs">
-        <div><label for="e-orders">D2C orders per month <output id="o-orders"></output></label><input type="range" id="e-orders" min="0" max="10000" step="50" value="1000"></div>
-        <div><label for="e-units">Average units per order <output id="o-units"></output></label><input type="range" id="e-units" min="1" max="5" step="0.1" value="1.5"></div>
-        <div><label for="e-pallets">Pallets in storage <output id="o-pallets"></output></label><input type="range" id="e-pallets" min="0" max="200" step="1" value="6"></div>
-        <div><label for="e-bins">Bin / shelf locations <output id="o-bins"></output></label><input type="range" id="e-bins" min="0" max="500" step="5" value="40"></div>
-        <div><label for="e-inbound">Single-SKU pallets received per month <output id="o-inbound"></output></label><input type="range" id="e-inbound" min="0" max="100" step="1" value="4"></div>
-        <div><label for="e-cases">B2B / FBA case orders per month <output id="o-cases"></output></label><input type="range" id="e-cases" min="0" max="500" step="5" value="0"></div>
-      </div>
-      <label class="chk" for="e-email"><input type="checkbox" id="e-email"> Orders arrive by email instead of the ShipHero integration (+$2.00 each)</label>
-      <div class="tiles">
-        <div class="tile"><div class="t-l">Fulfillment</div><div class="t-v" id="t-ful">$0</div><div class="t-s">pick, pack, label</div></div>
-        <div class="tile"><div class="t-l">Storage</div><div class="t-v" id="t-sto">$0</div><div class="t-s">pallets + bins / month</div></div>
-        <div class="tile"><div class="t-l">Receiving &amp; B2B</div><div class="t-v" id="t-rec">$0</div><div class="t-s">inbound + case orders</div></div>
-        <div class="tile hot"><div class="t-l">Monthly total</div><div class="t-v" id="t-tot">$0</div><div class="t-s" id="t-per">per order</div></div>
-      </div>
-      <p class="fine-math">Rates: $1.70 per D2C order (first unit included) + $0.30 each additional unit · $17/month per pallet position · $5/month per bin · $12 per single-SKU pallet received · $4 per case order · $2 per order entered by Epic. Excludes postage, packaging, prep labor ($35/hr) and pallet builds. Estimate only; your quote may differ.</p>
-      <a class="cta" href="#quote" style="margin-top:22px">Get an exact quote →</a>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var $=function(id){return document.getElementById(id)};
-  var fmt=function(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})};
-  function calc(){
-    var o=+$('e-orders').value,u=+$('e-units').value,p=+$('e-pallets').value,b=+$('e-bins').value,
-        r=+$('e-inbound').value,c=+$('e-cases').value,em=$('e-email').checked;
-    $('o-orders').textContent=o.toLocaleString(); $('o-units').textContent=u.toFixed(1);
-    $('o-pallets').textContent=p; $('o-bins').textContent=b; $('o-inbound').textContent=r; $('o-cases').textContent=c;
-    var ful=o*1.70+o*(u-1)*0.30+(em?(o+c)*2:0), sto=p*17+b*5, rec=r*12+c*4, tot=ful+sto+rec;
-    $('t-ful').textContent=fmt(ful); $('t-sto').textContent=fmt(sto); $('t-rec').textContent=fmt(rec); $('t-tot').textContent=fmt(tot);
-    var n=o+c; $('t-per').textContent=n? '$'+(tot/n).toFixed(2)+' per order':'per order';
-  }
-  ['e-orders','e-units','e-pallets','e-bins','e-inbound','e-cases','e-email'].forEach(function(id){$(id).addEventListener('input',calc)});
-  calc();
-})();
-</script>
 
 
 <section class="tex" id="fit">
